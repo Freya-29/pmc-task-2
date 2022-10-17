@@ -15,7 +15,7 @@ function readFormData() {
         pwd,
         cpwd,
     ) => {
-        let arr = JSON.parse(localStorage.getItem("user") || "[]");
+        let arr = JSON.parse(sessionStorage.getItem("user") || "[]");
         let detail = {
             name: name,
             gender: gender,
@@ -26,13 +26,13 @@ function readFormData() {
         }
         
         arr.push(detail);
-    window.localStorage.setItem("user", JSON.stringify(arr));
+    window.sessionStorage.setItem("user", JSON.stringify(arr));
 
     }
    user(name, gender,email,phoneno,pwd,cpwd);
 }
 function display() {
-    var data = JSON.parse(localStorage.getItem("user"));
+    var data = JSON.parse(sessionStorage.getItem("user"));
     for (let i=0; i< data.length; i++){
         var table = document.getElementById("tbody");
         var tr = document.createElement('tr');
@@ -99,7 +99,7 @@ function display() {
 
 function edit(e){
     const id = Number(e.target.getAttribute("nodeid"));
-    const storageTmp = JSON.parse(localStorage.getItem("user"));
+    const storageTmp = JSON.parse(sessionStorage.getItem("user"));
     console.log(storageTmp[id].name);
     console.log(id);
 
@@ -132,7 +132,7 @@ function save(e){
     var pw = tpwd(e);
     var tcpw = tcpwd(e);
     if(n && em && p && pw && tcpw ){
-        const storageTmp = JSON.parse(localStorage.getItem("user"));
+        const storageTmp = JSON.parse(sessionStorage.getItem("user"));
         console.log(storageTmp);
         console.log(e);
     
@@ -150,7 +150,7 @@ function save(e){
         storageTmp[e].phoneno=phoneno;
         storageTmp[e].pwd=pwd;
         storageTmp[e].cpwd=cpwd;
-        window.localStorage.setItem("user",JSON.stringify(storageTmp));
+        window.sessionStorage.setItem("user",JSON.stringify(storageTmp));
         //localStoragedata();
     
         document.querySelectorAll("table tbody tr").forEach(function(e){e.remove()})
@@ -255,14 +255,14 @@ function tcpwd(id){
 function deleterow(e){
 
     const id = Number(e.target.getAttribute("nodeid"));
-    const storageTmp = JSON.parse(localStorage.getItem("user"));
+    const storageTmp = JSON.parse(sessionStorage.getItem("user"));
     console.log(id);
     // for(var index=0; index<storageTmp.length;index++){
         storageTmp.splice(id,1);
     // }
     
     
-    localStorage.setItem("user", JSON.stringify(storageTmp));
+    sessionStorage.setItem("user", JSON.stringify(storageTmp));
     console.log("user");
     
     document.querySelectorAll("table tbody tr").forEach(function(e){e.remove()})
